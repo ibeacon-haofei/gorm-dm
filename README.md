@@ -1,12 +1,12 @@
-# gorm-dameng
+# gorm-dm
 **达梦8、达梦接入 gorm**  
 
 **使用方法**  
 引入：
 
 ``` go script
-	"git.haofei.org/drainage/gorm-dm8/customdbtype"
-	"git.haofei.org/drainage/gorm-dm8/dameng"
+	"github.com/ibeacon-haofei/gorm-dm/customdbtype"
+	"github.com/ibeacon-haofei/gorm-dm/dameng"
 ```
 
 

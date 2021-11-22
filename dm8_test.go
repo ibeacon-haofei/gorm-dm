@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"git.haofei.org/drainage/gorm-dm8/dameng"
+	"github.com/ibeacon-haofei/gorm-dm/dameng"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
@@ -48,7 +48,7 @@ func init() {
 		fmt.Println(err)
 	}
 }
-func add() error{
+func add() error {
 	a := &AlarmInfo{
 		Name:        "我是新增的数据",
 		Description: "测试",
@@ -67,7 +67,7 @@ func add() error{
 		return nil
 	})
 	if err != nil {
-		return  err
+		return err
 	}
 	return err
 }

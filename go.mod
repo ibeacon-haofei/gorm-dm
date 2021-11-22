@@ -1,4 +1,4 @@
-module git.haofei.org/drainage/gorm-dm8
+module github.com/ibeacon-haofei/gorm-dm
 
 go 1.15
 

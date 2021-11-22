@@ -7,13 +7,13 @@ package main
 
 import (
 	"fmt"
-	"git.haofei.org/drainage/gorm-dm8/customdbtype"
+	"github.com/ibeacon-haofei/gorm-dm/customdbtype"
 	"log"
 	"os"
 	"time"
 
-	"git.haofei.org/drainage/gorm-dm8/dameng"
 	"github.com/cengsin/oracle"
+	"github.com/ibeacon-haofei/gorm-dm/dameng"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"

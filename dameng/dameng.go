@@ -61,6 +61,9 @@ func (d Dialector) Initialize(db *gorm.DB) (err error) {
 		db.ConnPool = d.Conn
 	} else {
 		db.ConnPool, err = sql.Open(d.DriverName, d.DSN)
+		if err != nil {
+			return
+		}
 	}
 
 	if err = db.Callback().Create().Replace("gorm:create", Create); err != nil {

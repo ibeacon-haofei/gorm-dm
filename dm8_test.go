@@ -24,6 +24,29 @@ type AlarmInfo struct {
 	AlarmRuleID int       `json:"alarmRuleID" gorm:"column:"alarm_rule_id"`
 }
 
+type PsWwtp struct {
+	Id                int                 `gorm:"column:ID" json:"id"`
+	Code              string              `gorm:"column:CODE" json:"code"` //编码
+	Name              string              `gorm:"column:NAME" json:"name"` //名称
+	PsWwtpMonitorData []PsWwtpMonitorData `gorm:"foreignKey:PS_WWTP_ID"`
+}
+
+func (PsWwtp) TableName() string {
+	return "water.PS_WWTP"
+}
+
+type PsWwtpMonitorData struct {
+	Id         int       `gorm:"column:ID" json:"id"`
+	CreateTime time.Time `gorm:"column:CREATE_TIME" json:"createTime"` //创建时间
+	PsWwtpId   int       `gorm:"column:PS_WWTP_ID" json:"psWwtpId"`
+	Batch      string    `gorm:"column:BATCH" json:"batch"` //批次
+	PsWwtp     PsWwtp    `gorm:"foreignKey:PS_WWTP_ID"`
+}
+
+func (PsWwtpMonitorData) TableName() string {
+	return "water.PS_WWTP_MONITOR_DATA"
+}
+
 var (
 	db  *gorm.DB
 	err error
@@ -48,6 +71,7 @@ func init() {
 		fmt.Println(err)
 	}
 }
+
 func add() error {
 	a := &AlarmInfo{
 		Name:        "我是新增的数据",
@@ -60,7 +84,7 @@ func add() error {
 		AlarmRuleID: 18,
 	}
 	err = db.Transaction(func(tx *gorm.DB) error {
-		if err := tx.Debug().Table("water.alarm_info").Create(&a).Error; err != nil {
+		if err := tx.Debug().Table("water.alarm_info").Create(a).Error; err != nil {
 			fmt.Println(err)
 		}
 		// 返回 nil 提交事务
@@ -77,4 +101,12 @@ func (AlarmInfo) TableName() string {
 
 func TestDM8(t *testing.T) {
 	t.Log(add())
+}
+
+func TestSelect(t *testing.T) {
+
+	var data PsWwtpMonitorData
+	err = db.Preload("PsWwtp").Model(PsWwtpMonitorData{}).Find(&data).Error
+	t.Log(data)
+	t.Log(err)
 }

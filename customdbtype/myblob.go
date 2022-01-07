@@ -13,14 +13,15 @@ import (
 	"gitee.com/chunanyong/dm"
 )
 
-type MyBlob dm.DmBlob
+type MyBlob string
 
 // 写入数据库之前，对数据做类型转换
-func (blob *MyBlob) Value() (driver.Value, error) {
-	if blob == nil {
+func (blob MyBlob) Value() (driver.Value, error) {
+	if len(blob) == 0 {
 		return nil, nil
 	}
-	return dm.DmBlob(*blob), nil
+
+	return string(blob), nil
 }
 
 // 将数据库中取出的数据，赋值给目标类型
@@ -42,6 +43,7 @@ func (blob *MyBlob) Scan(v interface{}) error {
 		if err != nil {
 			return errors.New(fmt.Sprint("err：", err))
 		}
+		tmp.ReadString(1, int(le))
 		fmt.Println(val)
 		// *blob = MyBlob(val)
 		break

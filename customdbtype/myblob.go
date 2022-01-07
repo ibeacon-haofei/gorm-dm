@@ -28,22 +28,16 @@ func (blob MyBlob) Value() (driver.Value, error) {
 func (blob *MyBlob) Scan(v interface{}) error {
 	switch v.(type) {
 	case *dm.DmBlob:
-		tmp := v.(*dm.DmClob)
+		tmp := v.(*dm.DmBlob)
 		le, err := tmp.GetLength()
 		if err != nil {
 			return errors.New(fmt.Sprint("err：", err))
 		}
-
-		str, err := tmp.ReadString(1, int(le))
-		if err != nil {
-			return errors.New(fmt.Sprint("err：", err))
-		}
-		fmt.Println(str)
+		fmt.Println(le)
 		val, err := tmp.Value()
 		if err != nil {
 			return errors.New(fmt.Sprint("err：", err))
 		}
-		tmp.ReadString(1, int(le))
 		fmt.Println(val)
 		// *blob = MyBlob(val)
 		break

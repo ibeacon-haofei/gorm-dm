@@ -12,7 +12,6 @@ import (
 	"os"
 	"time"
 
-	"github.com/cengsin/oracle"
 	"github.com/ibeacon-haofei/gorm-dm/dameng"
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
@@ -31,9 +30,6 @@ func main() {
 
 	if dbType == "dameng" {
 		GORM_DB, err = gorm.Open(dameng.Open("dm://sysdba:dameng123!@193.100.100.221:5236?autoCommit=true"), gormConfig)
-	} else if dbType == "oracle" {
-		GORM_DB, err = gorm.Open(oracle.Open("ZTK/sirc1234@193.100.100.43:1521/ORCL"), gormConfig)
-		//GORM_DB, err := gorm.Open(dameng.Open( "dm://sysdba:dameng123!@193.100.100.221:5236?autoCommit=true&ignoreCase=true&columnNameUpperCase=true&compatibleMode=oracle"), gormConfig)
 	} else {
 		fmt.Println("dbType不正确")
 		os.Exit(0)

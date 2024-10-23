@@ -53,7 +53,7 @@ var (
 )
 
 func init() {
-	dsn := "dm://SYSDBA:SYSDBA@192.168.10.11:5236?autoCommit=true"
+	dsn := "dm://SYSDBA:SYSDBA@192.168.10.183:5236?autoCommit=true"
 
 	db, err = gorm.Open(dameng.Open(dsn), &gorm.Config{
 		Logger: logger.New(log.New(os.Stdout, "\r\n", log.LstdFlags), logger.Config{
